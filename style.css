@@ -1,1 +1,26 @@
+/* style.css */
 
+/* Override Bootstrap's default brand color with maroon */
+.custom-brand-color {
+    color: #7a0016 !important;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Custom hover animation for the profile image */
+.custom-img-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Elevates the image slightly when hovered over */
+.custom-img-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+
+/* Forces portfolio thumbnail images to be exactly the same size */
+.fixed-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Crops the image to fit without stretching it */
+}
