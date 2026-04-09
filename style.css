@@ -7,20 +7,20 @@
     letter-spacing: 1px;
 }
 
-/* Custom hover animation for the profile image */
+/* Custom hover animation for cards and gallery images */
 .custom-img-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Elevates the image slightly when hovered over */
+/* Elevates the element slightly when hovered over */
 .custom-img-hover:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
 }
 
-/* Forces portfolio thumbnail images to be exactly the same size */
+/* Forces images to exactly fill the box by stretching them */
 .fixed-img {
     width: 100%;
-    height: 250px;
-    object-fit: cover; /* Crops the image to fit without stretching it */
+    height: 300px; 
+    object-fit: fill;
 }
