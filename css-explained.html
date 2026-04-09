@@ -33,8 +33,8 @@
     <p>To fulfill the custom CSS requirement, I created a separate <code>style.css</code> file that loads after the Bootstrap CDN to override and extend default styles. Specifically, I implemented:</p>
     <ul>
       <li><strong>Brand Styling:</strong> I created a <code>.custom-brand-color</code> class to override the default navbar text color, applying a deep maroon hex code to give it an academic feel, increasing font weight, and adding letter spacing.</li>
-      <li><strong>Hover Transitions:</strong> I added a <code>.custom-img-hover</code> class to the profile and thumbnail images. Using CSS <code>transition</code> and <code>transform: translateY()</code> properties, the images slightly elevate and increase their drop shadow when a user hovers over them, creating a modern, interactive feel.</li>
-      <li><strong>Fixed Aspect Ratios:</strong> I implemented a <code>.fixed-img</code> class using <code>object-fit: cover</code> to ensure all grid thumbnails and detail gallery pictures remain exactly the same size without stretching or distorting the aspect ratio.</li>
+      <li><strong>Hover Transitions:</strong> I added a <code>.custom-img-hover</code> class to the grid thumbnails and detail gallery images. Using CSS <code>transition</code> and <code>transform: translateY()</code> properties, the images slightly elevate and increase their drop shadow when a user hovers over them, creating a modern, interactive feel.</li>
+      <li><strong>Uniform Sizing:</strong> I implemented a <code>.fixed-img</code> class using <code>object-fit: fill</code> to ensure all thumbnails and gallery pictures stretch to perfectly fill a uniform height, guaranteeing the layout remains mathematically consistent regardless of the original image dimensions.</li>
     </ul>
   </div>
 
