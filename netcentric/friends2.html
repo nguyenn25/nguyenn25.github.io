@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Friends API - Mission 2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script>
+    // Added 'id' fields to simulate a real database response
+    let data = {
+      "friends": [
+        {"id": 1, "firstName": "George", "lastName": "Kristoferson", "phone": "206-206-2066"},
+        {"id": 2, "firstName": "Bill", "lastName": "Madison", "phone": "425-425-4255"},
+        {"id": 3, "firstName": "Peter", "lastName": "Frampton", "phone": "212-555-4545"},
+        {"id": 4, "firstName": "Anna", "lastName": "Calixtus", "phone": "725-986-5321"},
+        {"id": 5, "firstName": "Marie", "lastName": "Curie", "phone": "601-774-4991"}
+      ]
+    };
+  </script>
+</head>
+<body class="bg-light" onload="LoadFriends()">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="mb-4">Friends List</h2>
+          <table class="table table-hover" id="friendsTable">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Full Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="bg-white p-4 rounded shadow-sm h-100" id="friendDetails">
+          <h4 class="text-muted mt-5 text-center">Click a friend's name to view their data.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Populates the table with links when the page loads
+    function LoadFriends() {
+      const tableBody = document.getElementById("friendsTable").getElementsByTagName('tbody')[0];
+      
+      data.friends.forEach(friend => {
+        const row = tableBody.insertRow();
+        const cell = row.insertCell(0);
+        
+        // Creates the link, simulating the API endpoint in the href, but overriding with onclick
+        const fullName = `${friend.firstName} ${friend.lastName}`;
+        cell.innerHTML = `<a href="https://api.com/friends/${friend.id}" onclick="ShowFriend(${friend.id}); return false;" class="text-decoration-none fw-bold">${fullName}</a>`;
+      });
+    }
+
+    // Pulls the whole friend object and displays it dynamically
+    function ShowFriend(friendId) {
+      // Find the specific friend in the array
+      const friend = data.friends.find(f => f.id === friendId);
+      
+      // Inject their data into the DOM
+      const displayArea = document.getElementById("friendDetails");
+      displayArea.innerHTML = `
+        <h2 class="border-bottom pb-2 text-primary">Friend Details</h2>
+        <div class="mt-4">
+          <h4><strong>Name:</strong> ${friend.firstName} ${friend.lastName}</h4>
+          <p class="fs-5 mt-3"><strong>Database ID:</strong> ${friend.id}</p>
+          <p class="fs-5"><strong>Phone Number:</strong> ${friend.phone}</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
