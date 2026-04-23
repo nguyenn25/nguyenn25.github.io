@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quant's Dilemma: Loss Aversion Simulator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; background-color: #0d1117; color: #c9d1d9; }
+        .terminal-box { background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 20px; }
+        .btn-trade { background-color: #238636; color: white; }
+        .btn-trade:hover { background-color: #2ea043; color: white; }
+        .btn-pass { background-color: #da3633; color: white; }
+        .btn-pass:hover { background-color: #f85149; color: white; }
+        .pnl-positive { color: #3fb950; font-weight: bold; }
+        .pnl-negative { color: #f85149; font-weight: bold; }
+        .ev-info { font-size: 0.85em; color: #8b949e; }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="container text-center" style="max-width: 650px;">
+        <h2 class="mb-4 text-light">QuantSim: Behavioral Alpha</h2>
+        
+        <div class="terminal-box shadow-lg mb-4">
+            <div class="d-flex justify-content-between mb-4 border-bottom border-secondary pb-3">
+                <h5 class="m-0">Capital: $<span id="capital">10000</span></h5>
+                <h5 class="m-0">Trades: <span id="trades-count">0</span>/<span id="total-trades">0</span></h5>
+            </div>
+
+            <!-- Game Board -->
+            <div id="game-board">
+                <h4 id="scenario-title" class="text-warning mb-3">Loading Market Data...</h4>
+                <p id="scenario-desc" class="fs-5 mb-4"></p>
+                
+                <div class="d-flex justify-content-center gap-3 mb-3">
+                    <button id="btn-take" class="btn btn-trade btn-lg px-4 fw-bold">Execute Trade</button>
+                    <button id="btn-pass" class="btn btn-pass btn-lg px-4 fw-bold">Bypass</button>
+                </div>
+                
+                <p class="ev-info mt-3" id="ev-display" style="display: none;">Expected Value: +$50</p>
+            </div>
+
+            <!-- End Screen -->
+            <div id="end-screen" style="display: none;">
+                <h3 class="mb-3 text-info">Simulation Complete</h3>
+                <p class="fs-5">Final PnL: <span id="final-pnl"></span></p>
+                <p id="behavioral-analysis" class="text-secondary mt-3"></p>
+                <button class="btn btn-outline-light mt-3" onclick="location.reload()">Restart Engine</button>
+            </div>
+        </div>
+
+        <div id="log" class="text-start ev-info" style="height: 120px; overflow-y: auto;">
+            <div>> Initialization complete. Awaiting order execution...</div>
+        </div>
+    </div>
+
+    <!-- JSON and JS Logic -->
+    <script>
+        const marketDataJSON = `[
+            {"id": 1, "title": "High-Frequency Arbitrage", "win": 300, "lose": 200, "prob": 0.6},
+            {"id": 2, "title": "Earnings Volatility Play", "win": 500, "lose": 450, "prob": 0.55},
+            {"id": 3, "title": "Statistical Reversion", "win": 150, "lose": 100, "prob": 0.7},
+            {"id": 4, "title": "Tail Risk Event", "win": 2000, "lose": 500, "prob": 0.25},
+            {"id": 5, "title": "Pairs Trade Divergence", "win": 400, "lose": 300, "prob": 0.5},
+            {"id": 6, "title": "Dark Pool Liquidity", "win": 100, "lose": 50, "prob": 0.8}
+        ]`;
+
+        const scenarios = JSON.parse(marketDataJSON);
+        let currentIdx = 0;
+        let capital = 10000;
+        let passedPositiveEV = 0;
+
+        const elCapital = document.getElementById('capital');
+        const elTradesCount = document.getElementById('trades-count');
+        const elTotalTrades = document.getElementById('total-trades');
+        const elTitle = document.getElementById('scenario-title');
+        const elDesc = document.getElementById('scenario-desc');
+        const elEvDisplay = document.getElementById('ev-display');
+        const elLog = document.getElementById('log');
+        const btnTake = document.getElementById('btn-take');
+        const btnPass = document.getElementById('btn-pass');
+
+        elTotalTrades.innerText = scenarios.length;
+        loadScenario();
+
+        function addLog(msg, type='normal') {
+            const div = document.createElement('div');
+            div.innerText = `> ${msg}`;
+            if (type === 'win') div.classList.add('pnl-positive');
+            if (type === 'lose') div.classList.add('pnl-negative');
+            elLog.prepend(div);
+        }
+
+        function loadScenario() {
+            if (currentIdx >= scenarios.length) {
+                endGame();
+                return;
+            }
+            
+            const s = scenarios[currentIdx];
+            elTradesCount.innerText = currentIdx;
+            elTitle.innerText = `Signal [${s.title}]`;
+            elDesc.innerHTML = `<span class="pnl-positive">+$${s.win}</span> (${(s.prob*100).toFixed(0)}% win rate) <br>vs<br> <span class="pnl-negative">-$${s.lose}</span> (${((1-s.prob)*100).toFixed(0)}% loss rate)`;
+            
+            const ev = (s.win * s.prob) - (s.lose * (1 - s.prob));
+            elEvDisplay.innerText = `Algorithm EV: ${ev >= 0 ? '+' : ''}$${ev.toFixed(2)}`;
+        }
+
+        function executeTrade(tookTrade) {
+            const s = scenarios[currentIdx];
+            const ev = (s.win * s.prob) - (s.lose * (1 - s.prob));
+
+            if (tookTrade) {
+                const roll = Math.random();
+                if (roll <= s.prob) {
+                    capital += s.win;
+                    addLog(`Executed ${s.title}: WON +$${s.win}`, 'win');
+                } else {
+                    capital -= s.lose;
+                    addLog(`Executed ${s.title}: LOST -$${s.lose}`, 'lose');
+                }
+            } else {
+                addLog(`Bypassed ${s.title}.`);
+                if (ev > 0) {
+                    passedPositiveEV++; 
+                }
+            }
+
+            elCapital.innerText = capital;
+            currentIdx++;
+            loadScenario();
+        }
+
+        btnTake.addEventListener('click', () => executeTrade(true));
+        btnPass.addEventListener('click', () => executeTrade(false));
+
+        function endGame() {
+            document.getElementById('game-board').style.display = 'none';
+            document.getElementById('end-screen').style.display = 'block';
+            elTradesCount.innerText = scenarios.length;
+            
+            const pnl = capital - 10000;
+            const pnlEl = document.getElementById('final-pnl');
+            pnlEl.innerText = (pnl >= 0 ? '+' : '') + '$' + pnl;
+            pnlEl.className = pnl >= 0 ? 'pnl-positive' : 'pnl-negative';
+
+            let analysis = "Engine shutdown sequence complete.";
+            if (passedPositiveEV > 2) {
+                analysis += " Warning: High Loss Aversion detected. You bypassed multiple high-yield positive EV systems.";
+            } else if (passedPositiveEV === 0) {
+                analysis += " Systemic Execution: You traded optimally based on expected value without emotional variance.";
+            } else {
+                analysis += " Minor risk aversion noted, but overall execution remained within standard deviations.";
+            }
+            document.getElementById('behavioral-analysis').innerText = analysis;
+        }
+    </script>
+</body>
+</html>
