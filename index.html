@@ -1,73 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nam Nguyen | Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nam H. Nguyen - Computer Science Portfolio</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #881337;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem 1rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { border-bottom: 2px solid var(--accent); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    h1 { font-size: 2.25rem; font-weight: 700; color: #fff; }
+    .subtitle { color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem; }
+    .contact-links { margin-top: 0.5rem; font-size: 0.95rem; }
+    .contact-links a { color: #38bdf8; text-decoration: none; margin-right: 1rem; }
+    .contact-links a:hover { text-decoration: underline; }
+    section { margin-bottom: 3rem; }
+    h2 { font-size: 1.5rem; color: #f1f5f9; border-left: 4px solid var(--accent); padding-left: 0.75rem; margin-bottom: 1.25rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; }
+    .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.75rem; font-weight: 600; }
+    .meta-list { list-style: none; margin-bottom: 1rem; font-size: 0.92rem; color: var(--text-muted); }
+    .meta-list li { margin-bottom: 0.25rem; }
+    .meta-list strong { color: #e2e8f0; }
+    .card img { width: 100%; max-height: 380px; object-fit: contain; background: #0b0f19; border-radius: 6px; border: 1px solid var(--border); margin: 1rem 0 0.5rem 0; }
+    .caption { font-size: 0.85rem; font-style: italic; color: var(--text-muted); text-align: center; }
+  </style>
 </head>
-<body class="bg-light">
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 shadow-sm">
-    <div class="container">
-      <a class="navbar-brand custom-brand-color" href="index.html">Nam Nguyen</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="css-explained.html">CSS Explained</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container bg-white p-4 rounded shadow-sm mb-5">
-    <h1 class="display-5 fw-bold text-center">Nam Nguyen</h1>
-    <p class="lead text-center text-muted">Computer Science | Seattle Pacific University</p>
-  </div>
-
+<body>
   <div class="container">
-    <h2 class="mb-4">My Focus Areas</h2>
-    <div class="row">
-      
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm custom-img-hover">
-          <img src="images/quant-thumb.jpg" class="card-img-top fixed-img" alt="Quant Finance">
-          <div class="card-body">
-            <h5 class="card-title">Quantitative Finance</h5>
-            <p class="card-text">Mathematical modeling and linear optimization.</p>
-            <a href="quant.html" class="btn btn-dark w-100">View Details</a>
-          </div>
-        </div>
+    <header>
+      <h1>Nam H. Nguyen</h1>
+      <p class="subtitle">Computer Science Student at Seattle Pacific University | Expected Graduation: June 2027</p>
+      <div class="contact-links">
+        <span>Seattle, WA</span> &bull;
+        <a href="mailto:nguyenn25@spu.edu">nguyenn25@spu.edu</a> &bull;
+        <a href="https://www.linkedin.com/in/nguyen-han-nam/" target="_blank">LinkedIn</a>
+      </div>
+    </header>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="card">
+        <p>I am a senior Computer Science student at Seattle Pacific University graduating in June 2027. My primary technical focus areas are C++ systems programming, corporate cybersecurity, and network security. I enjoy working close to the metal—understanding how memory management, low-level data structures, and cryptographic protocols operate under the hood to keep systems secure.</p>
+      </div>
+    </section>
+
+    <section id="certification">
+      <h2>Certification (Internship Alternative)</h2>
+      <div class="card">
+        <h3>C++ Certified Associate Programmer (CPA) – OpenEDG C++ Institute</h3>
+        <span class="badge">Passed &bull; October 2026</span>
+        <ul class="meta-list">
+          <li><strong>Format:</strong> Individual Professional Certification</li>
+          <li><strong>Key Competencies:</strong> C++ syntax and semantics, pointers, memory management, OOP, inheritance, polymorphism, exceptions, STL containers.</li>
+        </ul>
+        <p>As my internship alternative for CSC 4941, I prepared for and passed the C++ Certified Associate Programmer (CPA) exam administered by the C++ Institute. Earning this credential validated my ability to trace, debug, and implement low-level C++ software, supporting my career focus in systems and security engineering.</p>
+        <img src="cpa_certificate.png" alt="CPA Certificate Screenshot" />
+        <p class="caption">Official CPA Certification document screenshot by Nam Nguyen (Badge design courtesy of OpenEDG C++ Institute).</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Technical Projects</h2>
+
+      <!-- Project 1 -->
+      <div class="card">
+        <h3>1. Robotic Home Assistant – Cybersecurity & PQC Subsystem</h3>
+        <span class="badge">Team Capstone Project</span>
+        <ul class="meta-list">
+          <li><strong>Role:</strong> Cybersecurity & Cryptography Lead</li>
+          <li><strong>Key Competencies:</strong> Network Security, Post-Quantum Cryptography (PQC), Secure OTA Communication, Threat Modeling, C++/Python Systems Integration.</li>
+        </ul>
+        <p>For our senior capstone project, my team is developing an autonomous home patrol robot that monitors environments and streams real-time status updates to an authenticated mobile app. My role focuses on architecting secure network communication and integrating post-quantum cryptography to safeguard command streams and video feeds against eavesdropping or interception.</p>
+        <img src="project1_diagram.png" alt="Home Assistant Security Diagram" />
+        <p class="caption">Figure 1: Cyber-physical network security diagram for Robotic Home Assistant capstone project. (Image by Nam Nguyen)</p>
       </div>
 
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm custom-img-hover">
-          <img src="images/history-thumb.jpg" class="card-img-top fixed-img" alt="Three Kingdoms">
-          <div class="card-body">
-            <h5 class="card-title">Three Kingdoms History</h5>
-            <p class="card-text">Analysis of Chinese military history and strategy.</p>
-            <a href="history.html" class="btn btn-dark w-100">View Details</a>
-          </div>
-        </div>
+      <!-- Project 2 -->
+      <div class="card">
+        <h3>2. Full-Stack REST API & Web Service</h3>
+        <span class="badge">Individual Project</span>
+        <ul class="meta-list">
+          <li><strong>Role:</strong> Independent Developer</li>
+          <li><strong>Key Competencies:</strong> Node.js, Express.js, MongoDB, RESTful API Design, JWT Authentication, Postman Endpoint Testing.</li>
+        </ul>
+        <p>Engineered and deployed a backend REST service managing structured record storage and user authentication flows. Configured routing with Express, maintained schema validation in MongoDB, and verified endpoint status responses and auth middleware using Postman suites.</p>
+        <img src="project2_api.png" alt="REST API Testing Environment" />
+        <p class="caption">Figure 2: Visual Studio Code environment and Postman API endpoint testing. (Image by Nam Nguyen)</p>
       </div>
 
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm custom-img-hover">
-          <img src="images/systems-thumb.jpg" class="card-img-top fixed-img" alt="Systems Programming">
-          <div class="card-body">
-            <h5 class="card-title">Systems Programming</h5>
-            <p class="card-text">Low-level C++ and data structures.</p>
-            <a href="systems.html" class="btn btn-dark w-100">View Details</a>
-          </div>
-        </div>
+      <!-- Project 3 -->
+      <div class="card">
+        <h3>3. Membership Data Reconciliation Utility</h3>
+        <span class="badge">Individual Project</span>
+        <ul class="meta-list">
+          <li><strong>Role:</strong> Independent Developer</li>
+          <li><strong>Key Competencies:</strong> Java, Data Structures (TreeMap, HashSet), CSV File Parsing, Algorithm Design, Automated Diffing.</li>
+        </ul>
+        <p>Created a command-line Java reconciliation utility that automates discrepancy detection between roster files exported from different management platforms. Applied Java collection maps and key set diff algorithms to eliminate manual spreadsheet comparisons.</p>
+        <img src="project3_java.png" alt="Java List Reconciliation Algorithm" />
+        <p class="caption">Figure 3: Java diff algorithm using TreeMap and HashSet for automatic list reconciliation. (Image by Nam Nguyen)</p>
       </div>
 
-    </div>
+      <!-- Project 4 -->
+      <div class="card">
+        <h3>4. Reverse Polish Notation (RPN) Expression Evaluator</h3>
+        <span class="badge">Individual Project</span>
+        <ul class="meta-list">
+          <li><strong>Role:</strong> Independent Developer</li>
+          <li><strong>Key Competencies:</strong> Stack Data Structure, Java, Mathematical Parsing, Edge-Case Verification, CLI Testing.</li>
+        </ul>
+        <p>Implemented an RPN calculator evaluating postfix arithmetic expressions. Modeled stack push/pop evaluation routines, handling varied operator precedence and malformed inputs directly through the console.</p>
+        <img src="project4_rpn.png" alt="RPN Evaluator Terminal Output" />
+        <p class="caption">Figure 4: Terminal output demonstrating stack-based postfix evaluation on standard test cases. (Image by Nam Nguyen)</p>
+      </div>
+    </section>
   </div>
-
 </body>
 </html>
